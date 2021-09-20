@@ -1,0 +1,12 @@
+Dò Line TCRT5000 5 mắt: 
+  https://www.youtube.com/watch?v=vvicISV4PUc
+Khung Nhôm Xe Robot 2WD-A30 Màu Xanh
+  https://banlinhkien.com/khung-nhom-xe-robot-2wda30-mau-xanh-p12912190.html
+arduino uno r3
+L298P motor shield
+  https://nshopvn.com/product/motor-shield-l298p/
+  http://elesson.tc.edu.tw/md221/pluginfile.php/4241/mod_page/content/10/L298_Motor_Shield_Manual.pdf
+  https://wiki.dfrobot.com/Arduino_Motor_Shield__L298N___SKU_DRI0009_#target_1
+khay pin 18650 4cell
+4 pin 18650 3.7v 
+điện trở, tụ, biến trở, ...
