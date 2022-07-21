@@ -1,79 +1,70 @@
-int maxSpeed = 120;
+int maxSpeed = 255;
 
-int s1 = 3; 
-int s2 = 2;
-int s3 = 5;
-int s4 = 6;
-int s5 = 7;
-
-int a, b, c, d, e;
+//int s1 = 2; 
+//int s2 = 3;
+//int s3 = 5;
+//int s4 = 6;
+//int s5 = 7;
+//int a, b, c, d, e;
 
 int E1 = 10;
-int M1 = 12;
+//int M1 = 12;
 int E2 =11;
-int M2 = 13;
+//int M2 = 13;
 
 void setup() {
   Serial.begin(9600);
-  pinMode(M1, OUTPUT);
-  pinMode(M2, OUTPUT);
-  pinMode(s1, INPUT);
-  pinMode(s2, INPUT);
-  pinMode(s3, INPUT);
-  pinMode(s4, INPUT);
-  pinMode(s5, INPUT);
+//  pinMode(M1, OUTPUT);
+//  pinMode(M2, OUTPUT);
+//  pinMode(s1, INPUT);
+//  pinMode(s2, INPUT);
+//  pinMode(s3, INPUT);
+//  pinMode(s4, INPUT);
+//  pinMode(s5, INPUT);
+  DDRD = B00000000;
+  DDRB = B00110000;
 }
 
 void loop() {
-  a = digitalRead(s1);
-  b = digitalRead(s2);
-  c = digitalRead(s3);
-  d = digitalRead(s4);
-  e = digitalRead(s5);
-  Serial.print(a);Serial.print(" ");
-  Serial.print(b);Serial.print(" ");
-  Serial.print(c);Serial.print(" ");
-  Serial.print(d);Serial.print(" ");
-  Serial.print(e);Serial.print(" ");
-  if(a == 1 && b == 0 && c == 0 && d == 0 && e == 1 || 
-     a == 1 && b == 1 && c == 0 && d == 1 && e == 1
-    ){
-    digitalWrite(M1,LOW);
-    digitalWrite(M2, LOW);
+//  a = digitalRead(s1);
+//  b = digitalRead(s2);
+//  c = digitalRead(s3);
+//  d = digitalRead(s4);
+//  e = digitalRead(s5);
+  byte getted = ((PIND&B11100000) >> 3) | ((PIND&B00001100) >> 2);
+  Serial.print(getted,BIN);Serial.print(" ");
+  if(getted == B00010001 || getted == B00011011){
+//    digitalWrite(M1,LOW);
+//    digitalWrite(M2, LOW);
+    PORTB = B00000000;
     analogWrite(E1, maxSpeed);
     analogWrite(E2, maxSpeed);
-    Serial.println(" thang");
+    Serial.print(" thang");
   }
-  else if(a == 0 && b == 0 && c == 0 && d == 0 && e == 0){
-    digitalWrite(M1,HIGH);
-    digitalWrite(M2, HIGH);
+  else if(getted == B00000000){
+//    digitalWrite(M1,HIGH);
+//    digitalWrite(M2, HIGH);
+    PORTB = B00110000;
     analogWrite(E1, maxSpeed);
     analogWrite(E2, maxSpeed);
-    Serial.println(" lui");
+    Serial.print(" lui");
   }
-  else if(a == 0 && b == 0 && c == 0 && d == 1 && e == 1 ||
-          a == 0 && b == 0 && c == 1 && d == 1 && e == 1 || 
-          a == 0 && b == 1 && c == 1 && d == 1 && e == 1 ||
-          a == 1 && b == 0 && c == 1 && d == 1 && e == 1 ||
-          a == 1 && b == 0 && c == 0 && d == 1 && e == 1 
-         ){
-    digitalWrite(M1,HIGH);
-    digitalWrite(M2, LOW);
+  else if( getted == B00000011 || getted == B00000111 || getted == B00001111 || getted == B00010111 || getted == B00010011 ){
+//    digitalWrite(M1,HIGH);
+//    digitalWrite(M2, LOW);
+    PORTB = B00100000;
     analogWrite(E1, maxSpeed);
     analogWrite(E2, maxSpeed);
-    Serial.println(" trai");
+    Serial.print(" trai");
   }
-  else if(a == 1 && b == 1 && c == 0 && d == 0 && e == 0 ||
-          a == 1 && b == 1 && c == 1 && d == 0 && e == 0 || 
-          a == 1 && b == 1 && c == 1 && d == 1 && e == 0 ||
-          a == 1 && b == 1 && c == 1 && d == 0 && e == 1 || 
-          a == 1 && b == 1 && c == 0 && d == 0 && e == 1 
-         ){
-    digitalWrite(M1,LOW);
-    digitalWrite(M2, HIGH);
+  else if( getted == B00011000 || getted == B00011100 || getted == B00011110 || getted == B00011101 || getted == B00011001 ){
+//    digitalWrite(M1,LOW);
+//    digitalWrite(M2, HIGH);
+    PORTB = B00010000;
     analogWrite(E1, maxSpeed);
     analogWrite(E2, maxSpeed);
-    Serial.println(" phai");
+    Serial.print(" phai");
   }
   delay(20);
+  Serial.println();
 }
