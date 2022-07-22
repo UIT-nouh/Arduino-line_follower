@@ -1,15 +1,11 @@
+#include <TimerOne.h>
+
 int maxSpeed = 255;
-
-//int s1 = 2; 
-//int s2 = 3;
-//int s3 = 5;
-//int s4 = 6;
-//int s5 = 7;
-//int a, b, c, d, e;
-
-int E1 = 10;
+//int online = 0, maxOnline = 255, bottom = 80, above = 255;
+//boolean leftCatch, rightCatch;
+int ME1 = 10;
 //int M1 = 12;
-int E2 =11;
+int ME2 =11;
 //int M2 = 13;
 
 void setup() {
@@ -23,48 +19,68 @@ void setup() {
 //  pinMode(s5, INPUT);
   DDRD = B00000000;
   DDRB = B00110000;
+  Timer1.initialize(20000);
+  Timer1.attachInterrupt(PID);
 }
 
 void loop() {
-//  a = digitalRead(s1);
-//  b = digitalRead(s2);
-//  c = digitalRead(s3);
-//  d = digitalRead(s4);
-//  e = digitalRead(s5);
-  byte getted = ((PIND&B11100000) >> 3) | ((PIND&B00001100) >> 2);
-  Serial.print(getted,BIN);Serial.print(" ");
+  
+}
+void PID()
+{
+  byte getted = ((PIND&B11100000) >> 3) | ((PIND&B00001100) >> 2); 
   if(getted == B00010001 || getted == B00011011){
-//    digitalWrite(M1,LOW);
-//    digitalWrite(M2, LOW);
     PORTB = B00000000;
-    analogWrite(E1, maxSpeed);
-    analogWrite(E2, maxSpeed);
-    Serial.print(" thang");
+    analogWrite(ME1, maxSpeed);
+    analogWrite(ME2, maxSpeed);
   }
   else if(getted == B00000000){
-//    digitalWrite(M1,HIGH);
-//    digitalWrite(M2, HIGH);
-    PORTB = B00110000;
-    analogWrite(E1, maxSpeed);
-    analogWrite(E2, maxSpeed);
-    Serial.print(" lui");
+    //PORTB = B00110000;
+    PORTB = B00000000;
+    analogWrite(ME1, maxSpeed);
+    analogWrite(ME2, maxSpeed);
   }
-  else if( getted == B00000011 || getted == B00000111 || getted == B00001111 || getted == B00010111 || getted == B00010011 ){
-//    digitalWrite(M1,HIGH);
-//    digitalWrite(M2, LOW);
-    PORTB = B00100000;
-    analogWrite(E1, maxSpeed);
-    analogWrite(E2, maxSpeed);
-    Serial.print(" trai");
+  else if( getted == B00000011 || getted == B00000111 || getted == B00001111 || getted == B00010111 || getted == B00010011 ){  
+    int speeds = 0;
+    if(getted == B00001111){
+      PORTB = B00100000;
+      speeds = 255;
+    }
+    else if( getted == B00000111){
+      PORTB = B00100000;
+      speeds = 0;
+    }
+    else if( getted == B00010111){
+      PORTB = B00000000;
+      speeds = 120;
+    }
+    else if( getted == B00010011){
+      PORTB = B00000000;
+      speeds = 180;
+    }
+    analogWrite(ME1, maxSpeed);
+    analogWrite(ME2, speeds);
   }
-  else if( getted == B00011000 || getted == B00011100 || getted == B00011110 || getted == B00011101 || getted == B00011001 ){
-//    digitalWrite(M1,LOW);
-//    digitalWrite(M2, HIGH);
-    PORTB = B00010000;
-    analogWrite(E1, maxSpeed);
-    analogWrite(E2, maxSpeed);
-    Serial.print(" phai");
+  else if(getted == B00011000 || getted == B00011100 || getted == B00011110 || getted == B00011101 || getted == B00011001){
+    int speeds = 0;
+    if(getted == B00011110){
+      PORTB = B00010000;
+      speeds = 255;
+    }
+    else if( getted == B00011100){
+      PORTB = B00010000;
+      speeds = 0;
+    }
+    else if( getted == B00011101){
+      PORTB = B00000000;
+      speeds = 120;
+    }
+    else if( getted == B00011001){
+      PORTB = B00000000;
+      speeds = 180;
+    }
+    //PORTB = B00010000;
+    analogWrite(ME1, speeds);
+    analogWrite(ME2, maxSpeed);
   }
-  delay(20);
-  Serial.println();
 }

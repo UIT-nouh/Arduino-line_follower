@@ -1,0 +1,10 @@
+Điều khiển pin bằng ngôn ngữ chính thống: http://arduino.vn/tutorial/1357-dieu-khien-pin-bang-ngon-ngu-chinh-thong
+Bài 2: Kiểm chứng tốc độ khi điều khiển các pin bằng ngôn ngữ AVR so với các lệnh trên Arduino http://arduino.vn/tutorial/1359-bai-2-kiem-chung-toc-do-khi-dieu-khien-cac-pin-bang-ngon-ngu-avr-so-voi-cac-lenh-tren
+AVR-Xuất xung với tần số và độ rộng theo ý muốn: http://arduino.vn/tutorial/1416-avr-xuat-xung-voi-tan-so-va-do-rong-theo-y-muon
+Xung PWM: http://arduino.vn/reference/xung-pwm
+Controlling Self Driving Cars: https://www.youtube.com/watch?v=4Y7zG48uHRo
+Điều khiển PID là gì?: https://www.youtube.com/watch?v=tKLFX3b88vM
+Phương pháp điều chỉnh thông số cho bộ điều khiển PID: https://www.youtube .com/watch?v=2Cm5qQ-hjM8
+PID control on arduino: https://www.youtube.com/watch?v=crw0Hcc67RY
+Điều Khiển Động Cơ DC bằng PID và Arduino: https://www.youtube.com/watch?v=_8_9oQ38BKc
+P.I.D là gì trong quadcopter: https://www.youtube.com/watch?v=xa_K_Q8hd_w
